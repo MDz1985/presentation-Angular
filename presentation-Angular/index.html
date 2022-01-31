@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/black.css">
+  <link rel="stylesheet" href="dist/own.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <section class="slide1">
+      <img src="https://otus.ru/journal/wp-content/uploads/2021/06/Angular-.png" alt="angular icon">
+    </section>
+    <section class="slides2">
+      <section class="2.1">
+        <h1 class="demo-logo" style="margin-bottom: 20px">What is Angular?</h1>
+      </section>
+      <section class="slide2.1">
+        <p><b class="selected-text">Angular</b> is a development platform, built on <span>TypeScript</span></p>
+      </section>
+      <section class="2.2">
+        <h3>Angular includes:</h3>
+        <ul>
+          <li>A component-based framework for building scalable web applications</li>
+          <li>A collection of well-integrated libraries that cover a wide variety of features, including routing, forms
+            management, client-server communication, and more
+          </li>
+          <li>A suite of developer tools to help you develop, build, test, and update your code</li>
+        </ul>
+      </section>
+    </section>
+    <section class="slide3">
+      <section class="3.1">
+        <h2>Why should we use it?</h2>
+      </section>
+      <section class="3.2">
+        <ul>
+          <li>Develop across all platforms</li>
+          <li>Speed & performance</li>
+          <li>Incredible tooling</li>
+          <li>Unified development process</li>
+          <li>Simplified testing process</li>
+        </ul>
+      </section>
+    </section>
+
+    <section class="slide4">
+      <section class="4.1">
+        <h2>Angular application: <br> Basic concepts</h2>
+        <ul>
+          <li>Components</li>
+          <li>Templates</li>
+          <li>Dependency injection</li>
+          <li>Angular CLI</li>
+          <li>First-party libraries</li>
+        </ul>
+      </section>
+
+    </section>
+    <section>
+      <section>
+        <h2>Components</h2>
+      </section>
+
+      <section data-auto-animate>
+        <h4>Minimal Angular component</h4>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+          import { Component } from '@angular/core';
+
+          @Component({
+            selector: 'hello-world',
+            template: `
+              <h2>Hello World</h2>
+              <p>This is my first component!</p>
+            `
+          })
+
+          export class HelloWorldComponent {
+            // The code in this class drives the component's behavior.
+          }
+        </code></pre>
+      </section>
+      <section data-auto-animate>
+        <h4>Example</h4>
+        <p class="small-text">Use:</p>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+          &lthello-world>&lt/hello-world>
+        </code></pre>
+        <p class="small-text">Result after rendering</p>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+          &lthello-world>
+            &lth2>Hello World&lt/h2>
+            &ltp>This is my first component!&lt/p>
+          &lt/hello-world>
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+
+      <section>
+        <h2>Templates</h2>
+        <p>Angular extends HTML with additional syntax that lets you insert dynamic values from your component.</p>
+      </section>
+
+      <section data-auto-animate>
+        <h4>Example</h4>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+          &ltp>{{ message }}&lt/p>
+        </code></pre>
+        <p class="small-text">The value for message comes from the component class:</p>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+          import { Component } from '@angular/core';
+
+            @Component ({
+              selector: 'hello-world-interpolation',
+              templateUrl: './hello-world-interpolation.component.html'
+            })
+            export class HelloWorldInterpolationComponent {
+                message = 'Hello, World!';
+            }
+        </code></pre>
+        <p class="small-text">Result:</p>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+          &ltp>Hello, World!&lt/p>
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h2>Dependency injection</h2>
+      </section>
+      <section>
+        <p class="code-like-text">logger.service.ts</p>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+            import { Injectable } from '@angular/core';
+
+            @Injectable({providedIn: 'root'})
+            export class Logger {
+              writeCount(count: number) {
+                console.warn(count);
+              }
+            }
+        </code></pre>
+      </section>
+      <section>
+        <p class="code-like-text">hello-world-di.component.ts</p>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+          import { Component } from '@angular/core';
+          import { Logger } from '../logger.service';
+
+          @Component({
+            selector: 'hello-world-di',
+            templateUrl: './hello-world-di.component.html'
+          })
+          export class HelloWorldDependencyInjectionComponent  {
+            count = 0;
+
+            constructor(private logger: Logger) { }
+
+            onLogMe() {
+              this.logger.writeCount(this.count);
+              this.count++;
+            }
+          }
+        </code></pre>
+      </section>
+    </section>
+
+    <section class="slide6">
+      <h2>Angular command line interface (CLI)</h2>
+      <pre data-id="code-animation">
+              add analytics build
+                  config deploy doc e2e
+                      extract-i18n generate
+                          help lint new run serve
+                              test update version
+      </pre>
+    </section>
+    <section class="slide7">
+      <section>
+        <h2>First-party libraries</h2>
+      </section>
+      <section>
+        <h4>Some libraries for example:</h4>
+        <pre data-id="code-animation" style="font-size: 1.8rem; line-height: 4rem">
+    Angular Router          Angular PWA
+    Angular Forms           Angular Animations
+    Angular HttpClient      Angular Schematics
+      </pre>
+      </section>
+    </section>
+
+    <section class="slide8">
+      <h2>parts interaction</h2>
+      <img src="https://angular.io/generated/images/guide/architecture/overview2.png" alt="angular scheme">
+    </section>
+    <section>
+      <img src="https://media.makeameme.org/created/look-dave-angular.jpg" alt="mem">
+      <p style="border: 1px solid white; width: fit-content" class="code-like-text">MDz1985 <span style="color: darkred">2022</span> RSSchool</p>
+    </section>
+  </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+  });
+</script>
+</body>
+</html>
